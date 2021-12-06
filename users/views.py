@@ -5,15 +5,18 @@ from .models import Users
 from .forms import UserForm
 
 def task_create(request):
-    if request.method == "POST":
-        form = UserForm(request.POST)
-        if form.is_valid():
-            form.save()
-            return HttpResponse("done!!")
+    if request.method == "POST" :
+        fname=request.POST['fname']
+        lname=request.POST['lname']
+        email=request.POST['email']
+        password=request.POST['password']
+        dob=request.POST['dob']
+        gender=request.POST['gender']
+        user = Users.objects.create(fname = fname, lname = lname, email = email, password= password, dob = dob,gender=gender)
+        user.save()
+        return HttpResponse("user save")
     else:
-        form = UserForm()
-
-    return render(request, "users/users_form.html", { "form": form, })
+        return render(request, "users/users_form.html")
 
 
 

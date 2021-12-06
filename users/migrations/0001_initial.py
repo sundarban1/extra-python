@@ -20,6 +20,7 @@ class Migration(migrations.Migration):
                 ('email', models.EmailField(max_length=15, verbose_name='users email')),
                 ('password', models.CharField(max_length=1500, verbose_name='users password')),
                 ('dob', models.DateField(verbose_name='user dob')),
+                ('gender', models.CharField(max_length=1500, verbose_name='users gender')),
             ],
         ),
     ]
