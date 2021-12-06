@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>sample form</title>
+    <meta name="keywords" content="form,MyUniversity,faculty">
+    <meta name="description" content="My university form">
+    <meta name="author" content="Raunak">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+
+<body>
+    <header>
+        <h1>signup</h1>
+    </header>
+    <main>
+        <form  method="POST">
+            {% csrf_token %}
+            <hr>
+            <h2> First name</h2>
+            <lable for="fname"></lable><input type="text" placeholder="firstname" id="fname" name="fname" required>
+            <h2> last name</h2>
+            <label for="Lname">
+                <input type="text" placeholder="lastname" id="Lname" name="lname" ></label><br>
+            <h2> Email</h2>
+            <label for="email">
+                <input type="email" placeholder="Email" id="email" name="email"required>
+                </label><br>
+            <h2> password</h2>
+                <label for="password">
+                    <input type="password" placeholder="password" id="password" name="password"required>
+                    </label>
+            
+            <!--DOB-->
+            <label for="birthday">DOB:</label>
+            <input type="date" id="DOB" name="dob" required>
+            <br>
+            <!-- radio for gender field-->
+            <h2> gender</h2>
+            <label for="male">
+                    <input type="radio" id="male" value="male" name="gender" checked>male
+                </label><br>
+            <label for="female">
+                    <input type="radio" id="female" value="female" name="gender">female
+                </label><br>
+            <label for="others">
+                    <input type="radio" id="others" value="others" name="gender">others
+                </label><br>
+                
+           
+            <hr>
+
+            <button type="submit">signup</button><br>
+
+            <a href="#fname">Go to top</a>
+        </form>
+    </main>
+</body>
+
+</html>
