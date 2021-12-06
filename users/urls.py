@@ -6,5 +6,5 @@ app_name = 'users'
 
 urlpatterns = [
     # Create a task
-    path('signup/', views.TaskCreateUser.as_view(), name='signup'),
+      path('create/', views.task_create, name='task_create')
 ]
