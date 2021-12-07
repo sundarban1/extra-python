@@ -13,5 +13,5 @@ class Users(models.Model):
     gender = models.CharField(verbose_name="users gender", max_length=10)
     
     def __str__(self):
-        return self.name
+        return self.fname
 

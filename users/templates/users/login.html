@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>sample form</title>
+</head>
+
+<body>
+    <h1>login</h1>
+    <main>
+        <form  method="POST" action="/users/login/">
+            {% csrf_token %}
+            <hr><h2>email:</h2>
+            <label for="email">
+                    <input type="email" placeholder="Email" id="email" name="email"required>
+            </label><br>
+            <h2> password</h2>
+            <label for="password">
+                        <input type="password" placeholder="password" id="password" name="password"required>
+            </label><br><hr>
+            <button type="submit">login</button>
+            <br>
+        </form>
+    </main>
+</body>
+</html>
+    
