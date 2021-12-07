@@ -14,9 +14,11 @@ def task_create(request):
         gender=request.POST['gender']
         user = Users.objects.create(fname = fname, lname = lname, email = email, password= password, dob = dob,gender=gender)
         user.save()
-        return HttpResponse("user save")
+        return redirect('/users/list/')
     else:
         return render(request, "users/users_form.html")
-
+def listing(request):
+    user_list = Users.objects.all()
+    return render(request, "users/users_list.html",{"user_list":user_list})
 
 

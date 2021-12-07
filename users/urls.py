@@ -5,6 +5,6 @@ from . import views
 app_name = 'users'
 
 urlpatterns = [
-    # Create a task
-      path('create/', views.task_create, name='task_create')
+  path('create/', views.task_create, name='task_create'),
+  path('list/',views.listing,name='listing')
 ]
