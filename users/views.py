@@ -55,8 +55,7 @@ def delete(request,pk):
 
 def update(request,pk):
     user_obj = get_object_or_404(Users, pk=pk)
-    
-    return redirect('/users/list/')
+    return render(request, "users/update.html",{"user":user_obj})
 
 def details(request,pk):
     user_obj = get_object_or_404(Users, pk=pk)
