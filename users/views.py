@@ -23,8 +23,11 @@ def task_create(request):
 
 
 def listing(request):
-    user_list = Users.objects.all()
-    return render(request, "users/users_list.html",{"user_list":user_list})
+    if 'login' not in request.session:
+        return render(request, "users/login.html")
+    else:
+        user_list = Users.objects.all()
+        return render(request, "users/users_list.html",{"user_list":user_list})
 
 
 def login(request):
@@ -35,6 +38,33 @@ def login(request):
         if not user_login:
             return HttpResponse(str("no user"))
         else:
+            request.session['login'] = 'true'
             return render(request, "users/profile.html",{"user":user_login})
+
     else:
         return render(request, "users/login.html")
+
+def logout(request):
+    del request.session['login']
+    return render(request, "users/login.html")
+
+def delete(request,pk):
+    user_obj = get_object_or_404(Users, pk=pk)
+    user_obj.delete()
+    return redirect('/users/list/')
+
+def update(request,pk):
+    user_obj = get_object_or_404(Users, pk=pk)
+    
+    return redirect('/users/list/')
+
+def details(request,pk):
+    user_obj = get_object_or_404(Users, pk=pk)
+    return render(request, "users/profile.html",{"user":user_obj})
+
+
+
+
+
+
+

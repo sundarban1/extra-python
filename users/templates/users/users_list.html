@@ -15,13 +15,17 @@
     <h1>Users List</h1>
     <br>
     {% for user in user_list %}
-    <p>Firstname: {{user.fname}} </p><br>
-    <p>Lastname: {{user.lname}} </p><br>
-    <p>email: {{user.email}} </p><br>
-    <p>Date of birth: {{user.dob}} </p><br>
-    <p>Gender: {{user.gender}} </p><br>
+    <p>{{forloop.counter}}
+        Firstname: {{user.fname}} - Lastname: {{user.lname}} 
+        - email: {{user.email}}
+        - Date of birth: {{user.dob}} 
+        - Gender: {{user.gender}} 
+       (<a href='{% url 'users:delete' user.id %}'>delete</a> | <a href='{% url 'users:update' user.id %}'>update</a>|<a href='{% url 'users:details' user.id %}'>details</a>) <!--delete link -->
+       
+    </p>
     {% endfor %}
     <hr>
+    <p> <a href='/users/logout/'>logout</a></p>
 </body>
 </html>
 
