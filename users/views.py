@@ -50,7 +50,7 @@ def logout(request):
     return render(request, "users/login.html")
 
 def delete(request,pk):
-    if pk==request.session['user_id']:
+    if int(pk)==int(request.session['user_id']):
         return HttpResponse("invalid")
     else:
         user_obj = get_object_or_404(Users, pk=pk)
