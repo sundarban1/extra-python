@@ -58,8 +58,20 @@ def delete(request,pk):
         return redirect('/users/list/')
 
 def update(request,pk):
-    user_obj = get_object_or_404(Users, pk=pk)
-    return render(request, "users/update.html",{"user":user_obj})
+    if request.method == "POST" :
+        id=int(request.POST['userid'])
+        user =  Users.objects.get(id=id)
+        user.fname=request.POST['fname']
+        user.lname=request.POST['lname']
+        user.email=request.POST['email']
+        user.dob=request.POST['dob']
+        user.gender=request.POST['gender']
+        user.save()
+        return redirect('/users/list/')
+    else:
+        user_obj = get_object_or_404(Users, pk=pk)
+        return render(request, "users/update.html",{"user":user_obj})
+
     
 
 def details(request,pk):

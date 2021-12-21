@@ -14,8 +14,9 @@
         <h1>update</h1>
     </header>
     <main>
-        <form  method="POST" action="/users/update/">
+        <form  method="POST" action="/users/{{user.id}}/update/">
             {% csrf_token %}
+            <input type="hidden" name="userid" value="{{user.id}}">
             <hr>
             <h2> First name</h2>
             <lable for="fname"></lable><input type="text" value="{{user.fname}}" placeholder="firstname" id="fname" name="fname" required>
@@ -25,7 +26,8 @@
             <h2> Email</h2>
             <label for="email">
                 <input type="email" placeholder="Email" id="email" value="{{user.email}}" name="email"required>
-                </label><br>
+                </label>
+            <br>
             
             <!--DOB-->
             <label for="birthday">DOB:</label>
