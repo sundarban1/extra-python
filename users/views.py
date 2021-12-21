@@ -13,6 +13,7 @@ def task_create(request):
         lname=request.POST['lname']
         email=request.POST['email']
         password=request.POST['password']
+
         dob=request.POST['dob']
         gender=request.POST['gender']
         user = Users.objects.create(fname = fname, lname = lname, email = email, password= password, dob = dob,gender=gender)
