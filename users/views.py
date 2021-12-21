@@ -39,6 +39,7 @@ def login(request):
             return HttpResponse(str("no user"))
         else:
             request.session['login'] = 'true'
+            request.session['user_id'] = user_login.id
             return render(request, "users/profile.html",{"user":user_login})
 
     else:
@@ -49,13 +50,17 @@ def logout(request):
     return render(request, "users/login.html")
 
 def delete(request,pk):
-    user_obj = get_object_or_404(Users, pk=pk)
-    user_obj.delete()
-    return redirect('/users/list/')
+    if pk==request.session['user_id']:
+        return HttpResponse("invalid")
+    else:
+        user_obj = get_object_or_404(Users, pk=pk)
+        user_obj.delete()
+        return redirect('/users/list/')
 
 def update(request,pk):
     user_obj = get_object_or_404(Users, pk=pk)
     return render(request, "users/update.html",{"user":user_obj})
+    
 
 def details(request,pk):
     user_obj = get_object_or_404(Users, pk=pk)
