@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>User List</title>
+</head>
+<body>
+<h3>Task List</h3>
+{% for user in users %}
+    <p>{{ forloop.counter }}. {{ user.name }} - {{ user.gender }}
+        (
+        <a href="/users/list">Update</a> |
+        <a href="{% url 'users:user_delete' user.id %}">Delete</a> |
+        <a href="{% url 'users:user_details' user.id %}">Details</a>
+        )
+    </p>
+{% endfor %}
+</body>
+</html>
