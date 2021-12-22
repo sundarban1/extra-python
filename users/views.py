@@ -8,6 +8,7 @@ from .forms import UserForm
 from operator import itemgetter
 from django.contrib.auth.hashers import make_password,check_password
 from django.core.mail import message, send_mail
+from django.utils.crypto import get_random_string
 
 
 def task_create(request):
@@ -98,7 +99,26 @@ def details(request,pk):
     return render(request, "users/profile.html",{"user":user_obj})
 
 def forgot(request):
-    return render(request,'users/forgot_pwd.html')
+    if request.method=="POST":
+        email=request.POST['email']
+        password = get_random_string(length=32) #generating andom passwod
+        user =  Users.objects.get(email=email)
+        user.password=make_password(password) #storing random string on database
+        user.save()
+        #sending hashed pasword
+        send_mail(
+            'temprory password',
+            'your pass word is '+password,
+            'myapp@gmail.com',
+            [email],
+            fail_silently= False,
+        )
+        return redirect('/users/login')
+    else:   
+        return render(request,'users/forgot_pwd.html')
+    
+def passwordupdate(request):
+    return render(request,'users/new_password.html')
 
 
 
