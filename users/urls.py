@@ -12,4 +12,5 @@ urlpatterns = [
   re_path(r'^(?P<pk>\d+)/delete/$', views.delete, name='delete'),
   re_path(r'^(?P<pk>\d+)/update/$', views.update, name='update'),
   re_path(r'^(?P<pk>\d+)/details/$', views.details, name='details'),
+  path("forgot/",views.forgot, name="forgot"),
 ]

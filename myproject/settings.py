@@ -106,6 +106,7 @@ AUTH_PASSWORD_VALIDATORS = [
 ]
 
 
+
 # Internationalization
 # https://docs.djangoproject.com/en/3.1/topics/i18n/
 
@@ -124,3 +125,12 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
 
 STATIC_URL = '/static/'
+
+
+#mailtrap setting 
+EMAIL_HOST = 'smtp.mailtrap.io'
+EMAIL_HOST_USER = 'bb595f31bdc7b8'
+EMAIL_HOST_PASSWORD = 'c709f705a64c56'
+EMAIL_PORT = '2525'
+EMAIL_USE_TLS = False
+EMAIL_USE_SSL = False

@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>sample form</title>
+</head>
+
+<body>
+    <h1>forgot password</h1>
+    <main>
+        <form  method="POST" action="/users/forgot/">
+            {% csrf_token %}
+            <hr><h2>enter email:</h2>
+            <label for="email">
+                    <input type="email" placeholder="Email" id="email" name="email"required>
+            </label><br>
+            <hr>
+            <button type="submit">send link</button>
+            <br>
+        </form>
+    </main>
+</body>
+</html>
+    

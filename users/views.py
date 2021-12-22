@@ -6,18 +6,27 @@ from django.urls import reverse, reverse_lazy
 from .models import Users
 from .forms import UserForm
 from operator import itemgetter
+from django.contrib.auth.hashers import make_password,check_password
+from django.core.mail import message, send_mail
+
 
 def task_create(request):
     if request.method == "POST" :
         fname=request.POST['fname']
         lname=request.POST['lname']
         email=request.POST['email']
-        password=request.POST['password']
-
+        password=make_password(request.POST['password'])
         dob=request.POST['dob']
         gender=request.POST['gender']
         user = Users.objects.create(fname = fname, lname = lname, email = email, password= password, dob = dob,gender=gender)
         user.save()
+        send_mail(
+            'user created',
+            'welcome to my user app',
+            'myapp@gmail.com',
+            [email,'sundar@gmail.com'],
+            fail_silently= False,
+        )
         return redirect('/users/list/')
     else:
         return render(request, "users/users_form.html")
@@ -25,7 +34,7 @@ def task_create(request):
 
 def listing(request):
     if 'login' not in request.session:
-        return render(request, "users/login.html")
+        return redirect('/users/login')
     else:
         user_list = Users.objects.all()
         return render(request, "users/users_list.html",{"user_list":user_list})
@@ -35,12 +44,21 @@ def login(request):
     if request.method == "POST" :
         email=request.POST['email']
         password=request.POST['password']
-        user_login = Users.objects.get(email=email,password = password )
+        user_login = Users.objects.get(email=email)
+        if not check_password(password,user_login.password):
+            return HttpResponse('invalid password and email')
         if not user_login:
             return HttpResponse(str("no user"))
         else:
             request.session['login'] = 'true'
             request.session['user_id'] = user_login.id
+            send_mail(
+            'login sucessful',
+            'you have logged in sucessfully in myapp',
+            'myapp@gmail.com',
+            [email],
+            fail_silently= False,
+        )
             return render(request, "users/profile.html",{"user":user_login})
 
     else:
@@ -78,6 +96,11 @@ def update(request,pk):
 def details(request,pk):
     user_obj = get_object_or_404(Users, pk=pk)
     return render(request, "users/profile.html",{"user":user_obj})
+
+def forgot(request):
+    return render(request,'users/forgot_pwd.html')
+
+
 
 
 
